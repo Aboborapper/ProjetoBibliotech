@@ -1,7 +1,8 @@
 package com.bibliotech.api.API.emprestimos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.bibliotech.api.API.livros.Livro;
+import com.bibliotech.api.API.pessoas.Pessoa;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Table(name = "Emprestimo")
@@ -13,4 +14,30 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 
 public class Emprestimo {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private int data_emprestimo;
+    private int data_devolucao;
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
+    @ManyToOne
+    @JoinColumn(name = "livro_id")
+    private Livro livro;
+
+    public Emprestimo(DadosCadastroEmprestimo dados, Livro livro, Pessoa pessoa) {
+        if (dados.data_emprestimo() != 0) {
+            this.data_emprestimo = dados.data_emprestimo();
+        }
+        if (dados.data_devolucao() != 0) {
+            this.data_devolucao = dados.data_devolucao();
+        }
+        if (pessoa != null) {
+            this.pessoa = pessoa;
+        }
+        if (livro != null) {
+            this.livro = livro;
+        }
+    }
 }

@@ -33,7 +33,7 @@ import java.net.URI;
             Livro livro = livroRepositorio.getReferenceById(dados.livro_id());
             Pessoa pessoa = pessoaRepositorio.getReferenceById(dados.pessoa_id());
             Emprestimo emprestimo = emprestimoRepositorio.save(new Emprestimo(dados, livro, pessoa));
-            Long id = livro.getId();
+            Long id = emprestimo.getId();
             URI uri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/{id}")
@@ -51,7 +51,7 @@ import java.net.URI;
         @PutMapping("/alterar")
         @Transactional
         public ResponseEntity<?> alterar(@RequestBody DadosAlteracaoEmprestimo dados) {
-            if (!livroRepositorio.existsById(dados.id())) {
+            if (!emprestimoRepositorio.existsById(dados.id())) {
                 return ResponseEntity.notFound().build();
             }
             if(!pessoaRepositorio.existsById(dados.pessoa_id())) {
@@ -60,11 +60,11 @@ import java.net.URI;
             Pessoa pessoa = pessoaRepositorio.getReferenceById(dados.pessoa_id());
             Livro livro = livroRepositorio.getReferenceById(dados.livro_id());
             Emprestimo emprestimo = emprestimoRepositorio.getReferenceById(dados.id());
-            Emprestimo.atualizaInformacoes(dados, livro, pessoa);
+            emprestimo.atualizaInformacoes(dados, livro, pessoa);
             return ResponseEntity.ok(dados);
         }
 
-        @DeleteMapping("/excluit{id}")
+        @DeleteMapping("/excluir{id}")
         @Transactional
         public ResponseEntity<?> excluir(@PathVariable Long id) {
             if (!emprestimoRepositorio.existsById(id)) {

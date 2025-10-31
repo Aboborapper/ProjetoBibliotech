@@ -46,7 +46,7 @@ public class PessoaController {
         return ResponseEntity.ok(dados);
     }
 
-    @DeleteMapping("/excluit{id}")
+    @DeleteMapping("/excluir{id}")
     @Transactional
     public ResponseEntity<?> excluir(@PathVariable Long id) {
         if (!pessoaRepositorio.existsById(id)) {

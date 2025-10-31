@@ -1,8 +1,5 @@
 package com.bibliotech.api.API.emprestimos;
 
-import com.bibliotech.api.API.autores.Autor;
-import com.bibliotech.api.API.generos.Genero;
-import com.bibliotech.api.API.livros.DadosCadastroLivro;
 import com.bibliotech.api.API.livros.Livro;
 import com.bibliotech.api.API.pessoas.Pessoa;
 import jakarta.persistence.*;

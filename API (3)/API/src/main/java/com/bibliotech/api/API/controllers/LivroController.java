@@ -68,7 +68,7 @@ import java.net.URI;
             return ResponseEntity.ok(dados);
         }
 
-        @DeleteMapping("/excluit{id}")
+        @DeleteMapping("/excluir{id}")
         @Transactional
         public ResponseEntity<?> excluir(@PathVariable Long id) {
             if (!livroRepositorio.existsById(id)) {
